@@ -1,11 +1,9 @@
-#!/bin/bash
-
 i=0
 while [ $i -le 999 ]
-{
-    ./main <'./ska_srednie/in/in$i.in' >out
+do
+    ./main <./ska_srednie/in/in$i.in >out
  
-    if [ diff out ./ska_srednie/out/out"$i".out -ne ""]
+    if [ `diff out ./ska_srednie/out/out"$i".out` -ne "" ]
     then
         echo $"WA"
     else
@@ -13,6 +11,4 @@ while [ $i -le 999 ]
     fi
 
     i=$[i+1]
-}
-
-exit 1
+done

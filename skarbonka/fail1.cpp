@@ -4,9 +4,18 @@
 
 using namespace std;
 
-const int N = 10e6;
+typedef long long ll;
 
-int dodawanie[N+1];
+void debg(ll a)
+{
+    for(ll i=63; i >= 0; i--)
+    {
+        cout << (bool)(a & ((ll)1 << i) );
+    }
+
+    cout << " " << a << "\n";
+    return;
+}
 
 int main()
 {
@@ -15,30 +24,23 @@ int main()
     int n;
     cin >> n;
 
+    ll suma = 0;
+
     while(n--)
     {
-        int a;
+        ll a;
         cin >> a;
-        dodawanie[a]++;
+        suma += ((ll)1 << a);
     }
 
-    for(int i=0; i<N; i++)
+    for(ll i=63; i >= 0; i--)
     {
-        dodawanie[i+1] += dodawanie[i]/2;
-        dodawanie[i] %= 2;
-    }
-
-    for(int i=N; i>=0; i--)
-    {
-        if(dodawanie[i] != 0)
+        if((suma & ((ll)1 << i) )!= 0)
         {
             cout << i << "\n";
             return 0;
         }
-    }
-
-
-
+    }   
 
 
     return 0;

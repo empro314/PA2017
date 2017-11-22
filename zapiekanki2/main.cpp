@@ -8,8 +8,8 @@ typedef long long ll;
 typedef pair<ll, ll> pii;
 
 const ll tabSiz = 2097153;
-const ll adder = 1048676;
-const ll maxD = 1000000;
+const ll adder = 1048576;
+const ll maxD = 1000000+1;
 
 struct tree
 {
@@ -20,7 +20,7 @@ struct tree
         T.resize(tabSiz);
     }
 
-    void insert(int i, int p, int k, int x, int y, int ulg)
+    void insert(ll i, ll p, ll k, ll x, ll y, ll ulg)
     {
         bool done = false;
 
@@ -28,10 +28,11 @@ struct tree
         {
             T[i].first += ulg;
             T[i].second++;
+            //cout << "drzewo tutaj: " << i << "! "<< x << " " << y << "\n";
             return;
         }
 
-        int m = (p + k) / 2;
+        ll m = (p + k) / 2;
 
         if(x <= m)
         {
@@ -41,16 +42,22 @@ struct tree
         {
             insert(2*i+1, m+1, k, max(m+1, x), y, ulg);
         }
-
     }
 
-    int getCost(int i)
+    ll getCost(ll i)
     {
-        int ind = i + adder;
-        int res = 0;
+        ll ind = i + adder;
+        ll res = 0;
 
         while(ind)
         {
+            //cout << ind << " ";
+            //cout << "(" << T[ind].first << " " << T[ind].second << ") ";
+
+            /*if(T[ind].second != 0)
+            {
+                cout << ind << "! ";
+            } */
             res += (i * T[ind].second) - T[ind].first;
             ind /= 2; 
         }
@@ -65,23 +72,24 @@ int main()
 {
     ios_base::sync_with_stdio(0);
 
-    vector<int> clients;
+    vector<ll> clients;
 
-    int n, m;
+    ll n, m;
     cin >> n >> m;
 
-    for(int i=0; i<n; i++)
+    for(ll i=0; i<n; i++)
     {
-        int a;
+        ll a;
         cin >> a;
         clients.push_back(a);
     }
     clients.push_back(0);
     sort(clients.begin(), clients.end());
 
-    for(int i=1; i<clients.size(); i++)
+    for(ll i=1; i<clients.size(); i++)
     {
-        int differ = clients[i] - clients[i-1];
+        //cout << clients[i] << " ";
+        ll differ = clients[i] - clients[i-1];
 
         if(differ <= maxD)
         {
@@ -89,10 +97,12 @@ int main()
         }
     }
 
-    for(int i=0; i<m; i++)
+    for(ll i=0; i<m; i++)
     {
-        int d;
+        ll d;
         cin >> d;
+
+        //cout << "d: " << d << "\n";
 
         cout << Costs.getCost(d) << "\n"; 
     }

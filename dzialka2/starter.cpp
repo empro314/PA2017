@@ -14,7 +14,7 @@ const int INS = 100;
 
 void updateMin(deque<pii> &D, int time, int interv, int val)
 {
-    while(!D.empty() && D.front().second < time-interv)
+    while(!D.empty() && D.front().second <= time-interv)
     {
         D.pop_front();
     }
@@ -69,51 +69,51 @@ int fnd(int x, int y, int n, int m)
 
 int main()
 {
-    //ios_base::sync_with_stdio(0);
+    ios_base::sync_with_stdio(0);
 
     //cout << "dupa\n";
-    //int n = GetFieldHeight();
-    //int m = GetFieldWidth();
+    int n = GetFieldHeight();
+    int m = GetFieldWidth();
 
     
-    int instance = MyNodeId();
-    /*
+    //int instance = MyNodeId();
+    
     //<p, k)
 
-    int p = (n / 100) * instance;
-    int k = (n / 100) * (instance + 1);
+    int p = 1; //(n / 100) * instance;
+    int k = n;//(n / 100) * (instance + 1);
 
     int res = 0;
 
+    /*
     if(instance == INS)
     {
         k = n;
-    }
+    }*/
 
     for(int i=p; i<=k; i++)
     {
         for(int j=1; j<=m; j++)
         {
-            fnd(j, i, n, m);
+            res += fnd(j, i, n, m);
         }
     }
 
-    if(instance != 0)
+    /*if(instance != 0)
     {
         PutInt(0, res);
         Send(0);
     }
     else
+    for(int i=1; i<100; i++)
     {
-        for(int i=1; i<100; i++)
-        {
-            Receive(i);
-            res += GetInt(i);
-        }
-
-        cout << res << "\n";
+        Receive(i);
+        res += GetInt(i);
     }
     */
+
+    cout << res << "\n";
+    
 
     return 0;
 }

@@ -2,7 +2,7 @@
 
 for i in {1..12}
 do
-	./main <./wn/wn$i.in >out
+	./brute <./wn/wn$i.in >out
 
 	if [ "$(diff out ./wn/wn$i.out)" != "" ]
 	then

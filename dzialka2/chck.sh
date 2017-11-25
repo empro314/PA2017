@@ -1,10 +1,10 @@
 #!/bin/bash
 
-for i in {1..12}
+for i in {1..15}
 do
-	./brute <./2Btesty/$i.in >out2
+	./starter <./test/$i.in >out2
 
-	if [ "$(diff out2 ./2Btesty/$i.out)" != "" ]
+	if [ "$(diff -b out2 ./test/$i.out)" != "" ]
 	then
 		echo $"WA"
 		#cat ./2Btesty/$i.out

@@ -8,13 +8,13 @@
 using namespace std;
 
 typedef long long ll;
-typedef pair<int, int> pii;
+typedef pair<ll, ll> pii;
 
-const int INS = 100;
+const ll INS = 100;
 
-void updateMin(deque<pii> &D, int time, int interv, int val)
+void updateMin(deque<pii> &D, ll time, ll llerv, ll val)
 {
-    while(!D.empty() && D.front().second <= time-interv)
+    while(!D.empty() && D.front().second <= time-llerv)
     {
         D.pop_front();
     }
@@ -29,27 +29,31 @@ void updateMin(deque<pii> &D, int time, int interv, int val)
     return;
 }
 
-int fnd(int x, int y, int n, int m)
+ll fnd(ll x, ll y, ll n, ll m)
 {
-    vector<int> above;
+    vector<ll> above;
     deque<pii> minim;
     above.resize(m);
 
-    int res = 0;
 
-    for(int i=0; i<n; i++)
+
+    ll res = 0;
+    //cout << n << m;
+    for(ll i=0; i<n; i++)
     {
-        int behindMe = 0;
+        ll behindMe = 0;
         minim.clear();
-        for(int j=0; j<m; j++)
+        for(ll j=0; j<m; j++)
         {
             if(IsUsableCell(i, j) )
             {
                 behindMe++;
                 above[j]++;
+                //cout << 1 << " ";
             }
             else
             {
+                //cout << 0 << " ";
                 behindMe = 0;
                 above[j] = 0;
                 // wrzuc na heap 
@@ -62,8 +66,10 @@ int fnd(int x, int y, int n, int m)
                 res++;
             }
         }
+        //cout << "\n";
     }
 
+    //cout << "\n\n";
     return res;
 }
 
@@ -71,19 +77,18 @@ int main()
 {
     ios_base::sync_with_stdio(0);
 
-    //cout << "dupa\n";
-    int n = GetFieldHeight();
-    int m = GetFieldWidth();
+    ll n = GetFieldHeight();
+    ll m = GetFieldWidth();
 
     
-    //int instance = MyNodeId();
+    //ll instance = MyNodeId();
     
     //<p, k)
 
-    int p = 1; //(n / 100) * instance;
-    int k = n;//(n / 100) * (instance + 1);
+    ll p = 1; //(n / 100) * instance;
+    ll k = n;//(n / 100) * (instance + 1);
 
-    int res = 0;
+    ll res = 0;
 
     /*
     if(instance == INS)
@@ -91,28 +96,32 @@ int main()
         k = n;
     }*/
 
-    for(int i=p; i<=k; i++)
+    for(ll i=p; i<=k; i++)
     {
-        for(int j=1; j<=m; j++)
+        for(ll j=1; j<=m; j++)
         {
+            //cout << j << " " << i << "\n";
             res += fnd(j, i, n, m);
         }
     }
 
     /*if(instance != 0)
     {
-        PutInt(0, res);
+        Putll(0, res);
         Send(0);
     }
     else
-    for(int i=1; i<100; i++)
+    for(ll i=1; i<100; i++)
     {
         Receive(i);
-        res += GetInt(i);
+        res += Getll(i);
     }
     */
 
-    cout << res << "\n";
+    if(MyNodeId() == 0)
+    {
+        cout << res << "\n";
+    }
     
 
     return 0;

@@ -24,7 +24,8 @@ pii dfs(ll v, ll pred, ll myCosts, ll a, ll b, ll c, bool starter)
     }
     else
     {
-        res = pii(INF, v);
+        res = pii(-INF, -v);
+        //cout << INF <<"\n";
     }
 
     for(ll i=0; i<E[v].size(); i++)
@@ -96,8 +97,17 @@ int main()
         pii getter = dfs(orig, 0, 0, a, b, c, true);
 
         orig = -getter.second;
-        cout << orig << "n"; //<< getter.first << "\n";
+        cout << orig << " "; //<< getter.first << "\n";
     }
+
+   /*for(int i=1; i<=n; i++)
+    {
+        for(int j=0; j<E[i].size(); j++)
+        {
+            cout << C[i][j] << " ";
+        }
+        cout << "\n";
+    }*/
 
 
 
